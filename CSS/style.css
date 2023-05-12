@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("/img/background.jpg");
+    background-position: center;
+
+}
+
+#FormDatos{
+    border: solid 3px #474544;
+    max-width: 768px;
+    margin: 60px auto;
+    position: relative;
+    background: rgba(107, 0, 102, 0.769);
+    font-family: sans-serif;
+
+  }
+
+  #FormDatos h4, #myFormulario{
+    align-content: center;
+    text-align: center;
+    color: #ffffff;
+  }
+  input[type='text'], [type='email'], select, [type='number'], [type='tel'], [type='date'] {
+    font-family: sans-serif;
+    background: none;
+    border: none;    
+    border-bottom: solid 2px #474544;
+    color: #ffbaba;
+    font-size: 1.000em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0em 0 1.875em 0;
+    padding: 0 0 0.875em 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+  
+#titleForm{
+    color: #ffd900;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+button::before {
+  margin-left: auto;
+}
+
+button::after, button::before {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  transition: 0.5s;
+}
+
+button:hover::after, button:hover::before {
+  width: 100%;
+}
+
+table{
+  background-color: rgba(240, 248, 255, 0.705);
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td{
+  font-family: sans-serif;
+  padding: 5px;
+}
+
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#titleBonito{
+  justify-content: center;
+  text-align: center;
+  font-size: 5rem;
+  margin: .5rem;
+  color: #1111;
+  -webkit-text-stroke: 2px #ffd900;
+}
+td, th { padding: 20px; 
+} 

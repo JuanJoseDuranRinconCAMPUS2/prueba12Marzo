@@ -1,0 +1,113 @@
+<nav class="navbar">
+    <div id="tituloNav">
+        tower zenith
+    </div>
+    <a href="#" class="toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+        <ul>
+            <li><a href="./index.html">Nosotros</a></li>
+            <li><a href="./Registros.html">Registros</a></li>
+            <li><a href="./Solicitudes.html">Solicitudes</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+    </div>
+</nav>
+
+<style>
+
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+
+#tituloNav{
+    font-size: 5rem;
+    margin: .5rem;
+    color: #1111;
+    -webkit-text-stroke: 2px #ffd900;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-family: Roboto, "sans-serif";
+    font-size: 1.2rem;
+}
+
+.navbar ul li::before {
+    content: "";
+    height: 3px;
+    width: 0%;
+    background: yellowgreen;
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+}
+
+.navbar ul li:hover::before {
+    width: 100%;
+}
+
+.toggle{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50px;
+    height: 41px;
+}
+
+.toggle .bar{
+    height: 3px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px
+}
+
+@media (max-width: 994px){
+    #tituloNav{
+        font-size: 3rem;
+    }
+    .toggle{
+        display: flex;
+    }
+    .navbar-links{
+        display: none;
+        width: 100%;
+    }
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-links ul{
+        width: 100%;
+        flex-direction: column;
+    }
+    .navbar-links li{
+        text-align: center;
+    }
+    .navbar-links li a{
+        padding: .5rem 1rem;
+    }
+    .navbar-links.active{
+        display: flex;
+    }
+}
+</style>

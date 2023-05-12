@@ -1,0 +1,108 @@
+{
+  "reclutas": [
+    {
+      "nombre": "juan jose",
+      "edad": "18",
+      "telefono": "354",
+      "email": "thegoldenjuan1987@gmail.com",
+      "dirrecion": "365522",
+      "fecha_Nacimiento": "2012-12-31",
+      "CC": "9",
+      "fecha_Ingreso": "2023-05-03",
+      "id_Team": "4",
+      "id": 1
+    },
+    {
+      "nombre": "juan jose",
+      "edad": "20",
+      "telefono": "31233383",
+      "email": "johan.dura.04@outlook.com",
+      "dirrecion": "151656",
+      "fecha_Nacimiento": "2006-01-18",
+      "CC": "8",
+      "fecha_Ingreso": "2023-05-22",
+      "id_Team": "2",
+      "id": 2
+    },
+    {
+      "nombre": "maria",
+      "edad": "16",
+      "telefono": "3432234",
+      "email": "dfsffsf@gmail.com",
+      "dirrecion": "fsdfsdfsdfsdf",
+      "fecha_Nacimiento": "2023-05-08",
+      "CC": "3242423443",
+      "fecha_Ingreso": "2023-05-18",
+      "id_Team": "3",
+      "id": 3
+    },
+    {
+      "nombre": "coral",
+      "edad": "15",
+      "telefono": "3432234",
+      "email": "dfsffsf@gmail.com",
+      "dirrecion": "44gfdg",
+      "fecha_Nacimiento": "2023-05-30",
+      "CC": "44344444",
+      "fecha_Ingreso": "2023-02-18",
+      "id_Team": "1",
+      "id": 4
+    }
+  ],
+  "Team": [
+    {
+      "Team": "Columbia",
+      "trainer_asociado": "Miguel",
+      "id": 1
+    },
+    {
+      "Team": "Challenger",
+      "trainer_asociado": "Jolver",
+      "id": 2
+    },
+    {
+      "Team": "Discovery",
+      "trainer_asociado": "Luis",
+      "id": 3
+    },
+    {
+      "Team": "Atlantis",
+      "trainer_asociado": "Juan",
+      "id": 4
+    }
+  ],
+  "skill": [
+    {
+      "nombre_Skill": "html full",
+      "id": 1
+    },
+    {
+      "nombre_Skill": "css nativo",
+      "id": 2
+    },
+    {
+      "nombre_Skill": "javascript con dalton",
+      "id": 3
+    }
+  ],
+  "modulo_Skill": [
+    {
+      "id_skill": "1",
+      "nombre_Modulo": "web components",
+      "id": 1
+    },
+    {
+      "id_skill": "2",
+      "nombre_Modulo": "web components",
+      "id": 2
+    }
+  ],
+  "Evaluacion": [
+    {
+      "Id_recluta": "1",
+      "id_modulo,": "1",
+      "nota": "4",
+      "id": 1
+    }
+  ]
+}
