@@ -44,6 +44,7 @@ let OperacionTotal=async ()=>{
         let result = await response.json();    
         result.forEach(val => {
             tableData(val)
+            
 
         });
         setTimeout(() => {
@@ -76,7 +77,19 @@ let OperacionTeam=async (team)=>{
                 console.error(error);
         }
 }
-let OperacionMeses=async (team)=>{
+let OperacionSkillsAndModules=async (skill)=>{
+    const url = `http://localhost:41987/modulo_Skill?id_skill_gte=${skill}&id_skill_lte=${skill}`;
+    try {
+        const response = await fetch(url);
+        let result = await response.json();    
+        result.forEach(val => {
+            tableModulo(val)   
+        });
+        } catch (error) {
+                console.error(error);
+        }
+}
+let OperacionMeses=async ()=>{
     const url = `http://localhost:41987/reclutas?fecha_Ingreso_lte=2023-03-12`;
     try {
         const response = await fetch(url);
@@ -88,7 +101,7 @@ let OperacionMeses=async (team)=>{
                 console.error(error);
         }
 }
-let OperacionMenores=async (team)=>{
+let OperacionMenores=async ()=>{
     const url = `http://localhost:41987/reclutas?edad_lte=18`;
     try {
         const response = await fetch(url);
@@ -107,7 +120,8 @@ let OperacionSkill=async ()=>{
         const response = await fetch(url);
         let result = await response.json();    
         result.forEach(val => {
-            SelectionSkills(val)   
+            SelectionSkills(val) 
+            SelectionSkillsData(val)  
         });
         } catch (error) {
                 console.error(error);
@@ -131,13 +145,36 @@ let OperacionReclutas=async ()=>{
         const response = await fetch(url);
         let result = await response.json();    
         result.forEach(val => {
-            SelectionRecluta(val)   
+            SelectionRecluta(val);
+            SelectionModulosEstudiados(val);
         });
         } catch (error) {
                 console.error(error);
         }
 }
-
+let OperacionEvaluaciones= async (recluta)=>{
+    const url = `http://localhost:41987/Evaluacion?Id_recluta_gte=${recluta}&Id_recluta_lte=${recluta}`;
+    try {
+        const response = await fetch(url);
+        let result = await response.json();    
+        result.forEach(val => {
+            console.log(val["id_modulo,"]);
+            OperacionModuloEstudiado(val["id_modulo,"])  
+        });
+        } catch (error) {
+                console.error(error);
+        }
+}
+let OperacionModuloEstudiado=async (modulo)=>{
+    const url = `http://localhost:41987/modulo_Skill/${modulo}`;
+    try {
+        const response = await fetch(url);
+        let result = await response.json();    
+        tableModuloEstudido(result)
+        } catch (error) {
+                console.error(error);
+        }
+}
 
 const removerTablita = function removerTablita() {
     var divTabla = document.querySelectorAll("#atributos2");
@@ -145,7 +182,19 @@ const removerTablita = function removerTablita() {
         divTabla[i].remove();
     }
 }
+const removerTablitaModulos = function removerTablitaModulos() {
+    var divTabla2 = document.querySelectorAll("#atributos3");
+    for (var i = 0; i < divTabla2.length; i++) {
+        divTabla2[i].remove();
+    }
+}
 
+const removerTablitaEstudios = function removerTablitaModulos() {
+    var divTabla3 = document.querySelectorAll("#atributos4");
+    for (var i = 0; i < divTabla3.length; i++) {
+        divTabla3[i].remove();
+    }
+}
 function SistemaBotones() {
     let BotonTeam = document.querySelectorAll(".btn1");
     BotonTeam.forEach(boton => boton.addEventListener("click", (event) => {
@@ -154,6 +203,24 @@ function SistemaBotones() {
                     OperacionTeam(botonId);
                  }));
 }
+
+function selectSkill(){
+    let selectSkills = document.querySelector("#SelectSkills")
+    selectSkills.addEventListener("change", (e)=>{
+        var seleccion = selectSkills.options[selectSkills.selectedIndex].value;
+        removerTablitaModulos()
+        OperacionSkillsAndModules(seleccion)
+    })
+}
+function selectEstudiantes(){
+    let selectEs = document.querySelector("#SelectEstudiantes")
+    selectEs.addEventListener("change", (e)=>{
+        removerTablitaEstudios()
+        var seleccion = selectEs.options[selectEs.selectedIndex].value;
+        OperacionEvaluaciones(seleccion);
+    })
+}
+
 function tableData(Recluta){
     let myTbodyData = document.querySelector("#myTbodyData");
     
@@ -191,7 +258,7 @@ function tableMeses(Recluta){
     let myTbodyMeses = document.querySelector("#myTbodyMeses");
     
     myTbodyMeses.insertAdjacentHTML("beforeend", `
-    <tr id="atributos2">
+    <tr id="atributos">
         <td>${Recluta.nombre}</td>
         <td>${Recluta.edad}</td>
         <td>${Recluta.telefono}</td>
@@ -199,28 +266,6 @@ function tableMeses(Recluta){
         <td>${Recluta.email}</td>
         <td>${Recluta.id_Team}</td>
     </tr>
-    `)
-}
-
-function SelectionSkills(Recluta){
-    let mySelection = document.querySelector("#skill");
-    
-    mySelection.insertAdjacentHTML("beforeend", `
-    <option value="${Recluta.id}">${Recluta.nombre_Skill}</option>
-    `)
-}
-function SelectionRecluta(Recluta){
-    let mySystem = document.querySelector("#recluta");
-    console.log(mySystem);
-    mySystem.insertAdjacentHTML("beforeend", `
-    <option value="${Recluta.id}">${Recluta.nombre}</option>
-    `)
-}
-function SelectionModulo(Recluta){
-    let myModulo = document.querySelector("#modulo");
-    
-    myModulo.insertAdjacentHTML("beforeend", `
-    <option value="${Recluta.id}">${Recluta.nombre_Modulo}</option>
     `)
 }
 function tableMenores(Recluta){
@@ -237,12 +282,61 @@ function tableMenores(Recluta){
     </tr>
     `)
 }
+function tableModulo(modulo){
+    let myTbodyModulo = document.querySelector("#myTbodyModulo");
+    
+    myTbodyModulo.insertAdjacentHTML("beforeend", `
+    <tr id="atributos3">
+        <td>${modulo.id_skill}</td>
+        <td>${modulo.nombre_Modulo}</td>
+        <td>${modulo.id}</td>
+    </tr>
+    `)
+}
+function tableModuloEstudido(modulo){
+    let myTbodyModulo = document.querySelector("#myTbodyModulosEstudiados");
+    
+    myTbodyModulo.insertAdjacentHTML("beforeend", `
+    <tr id="atributos4">
+        <td>${modulo.id_skill}</td>
+        <td>${modulo.nombre_Modulo}</td>
+        <td>${modulo.id}</td>
+    </tr>
+    `)
+}
+function SelectionSkills(Recluta){
+    let mySelection = document.querySelector("#skill");
+    
+    mySelection.insertAdjacentHTML("beforeend", `
+    <option value="${Recluta.id}">${Recluta.nombre_Skill}</option>
+    `)
+}
+function SelectionRecluta(Recluta){
+    let mySystem = document.querySelector("#recluta");
+    mySystem.insertAdjacentHTML("beforeend", `
+    <option value="${Recluta.id}">${Recluta.nombre}</option>
+    `)
+}
+function SelectionModulo(Recluta){
+    let myModulo = document.querySelector("#modulo");
+    
+    myModulo.insertAdjacentHTML("beforeend", `
+    <option value="${Recluta.id}">${Recluta.nombre_Modulo}</option>
+    `)
+}
+function SelectionSkillsData(skill){
+    let mySkills2 = document.querySelector("#SelectSkills");
+    mySkills2.insertAdjacentHTML("beforeend", `
+    <option value="${skill.id}">${skill.nombre_Skill}</option>
+    `)
+}
+function SelectionModulosEstudiados(recluta){
+    let myModulos2 = document.querySelector("#SelectEstudiantes");
+    myModulos2.insertAdjacentHTML("beforeend", `
+    <option value="${recluta.id}">${recluta.nombre}</option>
+    `)
+}
 
-OperacionTotal();
-OperacionMenores();
-SistemaBotones();
-
-OperacionMeses();
 
 export default{
     showForm(){
@@ -268,6 +362,12 @@ export default{
             OperacionSkill();
             OperacionModulo();
             OperacionReclutas();
+            OperacionTotal();
+            OperacionMenores();
+            SistemaBotones();
+            OperacionMeses();
+            selectSkill();
+            selectEstudiantes();
         })
         
     }

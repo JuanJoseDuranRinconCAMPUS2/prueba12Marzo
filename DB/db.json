@@ -13,7 +13,7 @@
       "id": 1
     },
     {
-      "nombre": "juan jose",
+      "nombre": "johan",
       "edad": "20",
       "telefono": "31233383",
       "email": "johan.dura.04@outlook.com",
@@ -95,6 +95,16 @@
       "id_skill": "2",
       "nombre_Modulo": "web components",
       "id": 2
+    },
+    {
+      "id_skill": "2",
+      "nombre_Modulo": "spunikt",
+      "id": 3
+    },
+    {
+      "id_skill": "3",
+      "nombre_Modulo": "dalton",
+      "id": 4
     }
   ],
   "Evaluacion": [
@@ -103,6 +113,24 @@
       "id_modulo,": "1",
       "nota": "4",
       "id": 1
+    },
+    {
+      "Id_recluta": "3",
+      "id_modulo,": "3",
+      "nota": "3",
+      "id": 2
+    },
+    {
+      "Id_recluta": "4",
+      "id_modulo,": "1",
+      "nota": "2",
+      "id": 3
+    },
+    {
+      "Id_recluta": "1",
+      "id_modulo,": "4",
+      "nota": "1",
+      "id": 4
     }
   ]
 }
