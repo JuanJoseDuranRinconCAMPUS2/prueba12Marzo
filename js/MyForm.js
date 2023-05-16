@@ -133,7 +133,8 @@ let OperacionModulo=async ()=>{
         const response = await fetch(url);
         let result = await response.json();    
         result.forEach(val => {
-            SelectionModulo(val)   
+            SelectionModulo(val)  
+            SelectionEstudiantes(val)
         });
         } catch (error) {
                 console.error(error);
@@ -165,12 +166,39 @@ let OperacionEvaluaciones= async (recluta)=>{
                 console.error(error);
         }
 }
+let OperacionEvaluacionesBad= async (modulo)=>{
+    const url = `http://localhost:41987/Evaluacion?id_modulo,_gte=${modulo}&id_modulo,_lte=${modulo}&nota_lte=3`;
+    try {
+        const response = await fetch(url);
+        let result = await response.json();    
+        result.forEach(val => {
+            console.log(val["Id_recluta"]);
+            OperacionModuloEstudiadoBad(val["Id_recluta"]);
+        });
+        } catch (error) {
+                console.error(error);
+        }
+}
+
+
 let OperacionModuloEstudiado=async (modulo)=>{
     const url = `http://localhost:41987/modulo_Skill/${modulo}`;
     try {
         const response = await fetch(url);
         let result = await response.json();    
         tableModuloEstudido(result)
+        } catch (error) {
+                console.error(error);
+        }
+}
+
+let OperacionModuloEstudiadoBad=async (modulo)=>{
+    const url = `http://localhost:41987/reclutas/${modulo}`;
+    try {
+        const response = await fetch(url);
+        let result = await response.json(); 
+        console.log(result);   
+        tableModuloEstudidoBad(result)
         } catch (error) {
                 console.error(error);
         }
@@ -193,6 +221,12 @@ const removerTablitaEstudios = function removerTablitaModulos() {
     var divTabla3 = document.querySelectorAll("#atributos4");
     for (var i = 0; i < divTabla3.length; i++) {
         divTabla3[i].remove();
+    }
+}
+const removerTablitaEstudiosBad = function removerTablitaModulos() {
+    var divTabla4 = document.querySelectorAll("#atributos5");
+    for (var i = 0; i < divTabla4.length; i++) {
+        divTabla4[i].remove();
     }
 }
 function SistemaBotones() {
@@ -220,7 +254,15 @@ function selectEstudiantes(){
         OperacionEvaluaciones(seleccion);
     })
 }
-
+function selectEstudiantesBad(){
+    let selectEsB = document.querySelector("#SelectEstudiantesBad")
+    selectEsB.addEventListener("change", (e)=>{
+        var seleccion = selectEsB.options[selectEsB.selectedIndex].value;
+        removerTablitaEstudiosBad()
+        OperacionEvaluacionesBad(seleccion);
+        console.log(seleccion);
+    })
+}
 function tableData(Recluta){
     let myTbodyData = document.querySelector("#myTbodyData");
     
@@ -304,6 +346,21 @@ function tableModuloEstudido(modulo){
     </tr>
     `)
 }
+function tableModuloEstudidoBad(Recluta){
+    let myTbodyBad = document.querySelector("#myTbodyModulosEstudiadosBad");
+    console.log(myTbodyBad);
+    myTbodyBad.insertAdjacentHTML("beforeend", `
+    <tr id="atributos5">
+        <td>${Recluta.id}</td>
+        <td>${Recluta.nombre}</td>
+        <td>${Recluta.edad}</td>
+        <td>${Recluta.telefono}</td>
+        <td>${Recluta.CC}</td>
+        <td>${Recluta.email}</td>
+        <td>${Recluta.id_Team}</td>
+    </tr>
+    `)
+}
 function SelectionSkills(Recluta){
     let mySelection = document.querySelector("#skill");
     
@@ -336,7 +393,12 @@ function SelectionModulosEstudiados(recluta){
     <option value="${recluta.id}">${recluta.nombre}</option>
     `)
 }
-
+function SelectionEstudiantes(modulo){
+    let myEstudiantes = document.querySelector("#SelectEstudiantesBad");
+    myEstudiantes.insertAdjacentHTML("beforeend", `
+    <option value="${modulo.id}">${modulo.nombre_Modulo}</option>
+    `)
+}
 
 export default{
     showForm(){
@@ -368,6 +430,7 @@ export default{
             OperacionMeses();
             selectSkill();
             selectEstudiantes();
+            selectEstudiantesBad()
         })
         
     }
